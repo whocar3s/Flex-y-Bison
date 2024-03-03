@@ -51,3 +51,13 @@ Ejercicios del capitulo uno del libro de flex &amp; bison
 8. **Reescriba el programa de recuento de palabras en C. Ejecute algunos archivos grandes en ambas versiones. ¿Es la versión C notablemente más rápida? ¿Cuánto más difícil fue depurar?**
 
    Para comparar la velocidad, ejecuté ambas versiones del programa (C y Flex) en archivos de texto grandes (varios megabytes). En general, la versión en C fue más rápida, con una diferencia de velocidad de 1 milisegundo. La versión en C fue más fácil de depurar que la versión en Flex. La razón principal es que el código C es más sencillo y directo, lo que facilita identificar los errores. En cambio, la versión en Flex utiliza expresiones regulares y un lexer, lo que puede dificultar la comprensión del flujo del programa y la detección de errores. La versión en C del programa de recuento de palabras es más rápida y más fácil de depurar que la versión en Flex. Si la velocidad y la facilidad de depuración son importantes, entonces la versión en C es la mejor opción. Sin embargo, la versión en Flex puede ser más flexible y adaptable a diferentes tipos de entrada.
+
+
+<br>
+
+## Miembros del grupo
+
+- Laura González
+- Camilo Madero
+- Paula Páez
+- Felipe Rodriguez

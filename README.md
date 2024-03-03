@@ -9,12 +9,37 @@ Ejercicios del capitulo uno del libro de flex &amp; bison
 
 2. **Convierta la calculadora en una calculadora hexadecimal que acepte números hexadecimales y decimales. En el escáner, agregue un patrón como `0x[a-f0-9]+` para que coincida con un número hexadecimal, y en el código de acción, use `strtol` para convertir la cadena a un número que almacene en `yylval`; luego devuelva un token `NÚMERO`. Ajuste la salida `printf` para imprimir el resultado tanto en decimal como en hexadecimal.**
 
+   Se agregó en el Flex:
+   ```
+   0x[a-f0-9]+ { yylval = strtol(yytext, NULL, 16); return NUMBER; }
+   ```
    ![CalculadoraHexadecimal](./src/CalculadoraHexadecimal.png)
 
 4. **Añada operadores de bits como AND y OR a la calculadora. El operador obvio a usar para OR es una barra vertical, pero ese ya es el operador unario de valor absoluto. operador. ¿Qué ocurre si también lo utlizas como operador binario OR, por ejemplo, `exp? Factor ABS`?**
 
+   Se modificó en el Flex:
+   ```
+      "|" { return OR; }
+      "&" { return AND; }
+   ```
+
+   Se modificó en el Bison:
+   ```
+   %token AND OR
+   ```
+   ```
+      term: NUMBER
+      | OR term { $$ = $2 >= 0 ? $2 : - $2; }
+      | OP exp CP { $$ = $2; } 
+      | exp AND exp { $$ = $1 & $3; }
+      | exp OR exp { $$ = $1 | $3; }
+      ;
+   ```
+   
    ![ANDYOR](./src/ANDyOR.png)
 
+   Funciona, aunque se pueden presentar problemas de ambigüedad.
+   
 6. **¿La versión manuscrita del escáner del ejemplo 1-4 reconoce exactamente los mismos tokens que la versión flex?**
 
    En teoría, sí, la versión manuscrita del escáner del Ejemplo 1-4 debería reconocer exactamente los mismos tokens que la versión flex. Ambas versiones están diseñadas para seguir las mismas expresiones regulares y reglas para identificar tokens. Siempre que ambas implementaciones sean lógicamente equivalentes y manejen los casos extremos de manera consistente, deberían producir resultados de tokenización idénticos.
